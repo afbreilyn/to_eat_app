@@ -27,11 +27,15 @@
   <body ng-app='todo' ng-controller="TodoCtrl">
 
     <ion-side-menus>
-
+      {% raw %}
         <!-- center content -->
         <ion-side-menu-content>
           <ion-header-bar class="bar-dark">
             <h1 class="title">Todo</h1>
+            <!-- new task button -->
+            <button class="button button-icon" ng-click="newTask()">
+              <i class="icon ion-compose"></i>
+            </button>
           </ion-header-bar>
           <ion-content>
             <ion-list>
@@ -51,7 +55,8 @@
 
     </ion-side-menus>
 
-    <script id="new-task.html" type="test/ng-template">
+    <script id="new-task.html" type="text/ng-template">
+
       <div class="modal">
 
         <!-- modal header -->
@@ -62,6 +67,7 @@
 
         <!-- modal content -->
         <ion-content>
+
           <form ng-submit="createTask(task)">
             <div class="list">
               <label class="item item-input">
@@ -72,9 +78,11 @@
               <button type="submit" class="button button-block button-positive">Create Task</button>
             </div>
           </form>
+
         </ion-content>
 
       </div>
+
     </script>
 
   </body>

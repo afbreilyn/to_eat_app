@@ -5,12 +5,36 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('todo', ['ionic'])
 
-.controller('TodoCtrl', function($scope) {
-  $scope.tasks = [
-    { title: 'Collect coints' },
-    { title: 'Eat mushrooms' },
-    { title: 'Meow meow' }
-  ];
+.controller('TodoCtrl', function($scope, $ionicModal) {
+  // initially empty task array
+  $scope.tasks = [];
+
+  // create and load the modal
+  $ionicModal.fromTemplateUrl('new-task.html', function(modal) {
+    $scope.taskModal = modal;
+  }, {
+    scope: $scope,
+    animation: 'slide-in-up'
+  });
+
+  // called upon submission
+  $scope.createTask = function(task) {
+    $scope.tasks.push({
+      title: task.title
+    });
+    $scope.taskModal.hide();
+    task.title = "";
+  };
+
+  // opens modal
+  $scope.newTask = function() {
+    $scope.taskModal.show();
+  };
+
+  // closes modal
+  $scope.closeNewTask = function() {
+    $scope.taskModal.hide();
+  };
 })
 
 .run(function($ionicPlatform) {
