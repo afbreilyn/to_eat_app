@@ -74,7 +74,9 @@ angular.module('todo', ['ionic'])
       return;
     }
     $scope.activeProject.tasks.push({
-      title: task.title
+      title: task.title,
+      done: false,
+      id: $scope.activeProject.tasks.length -1 || 0
     });
     $scope.taskModal.hide();
 
@@ -82,6 +84,11 @@ angular.module('todo', ['ionic'])
     Projects.save($scope.projects);
 
     task.title = "";
+  };
+
+  $scope.completeTask = function(task) {
+    // console.log("taskid is: " + task.title);
+
   };
 
   // opens modal
