@@ -44,7 +44,7 @@
           </ion-header-bar>
           <ion-content scroll="false">
             <ion-list>
-              <ion-item ng-repeat="task in activeProject.tasks">
+              <ion-item ng-repeat="task in activeProject.tasks" ng-style="{'background-color':task.colour['name']}">
                 {{task.title}}
                 <span class="checkbox-wrapper" ng-click="completeTask(task, $event)" my-change>
                   <i ng-if="!task.done" class="fa fa-square-o" id="{{task.id}}"></i>
@@ -88,12 +88,9 @@
             <div class="list">
               <label class="item item-input">
                 <input type="text" placeholder="What do you need to do?" ng-model="task.title">
-                <select>
-                  <option></option>
-                  <option></option>
-                  <option></option>
-                  <option></option>
-                </select>
+              </label>
+              <label class="item item-input">
+                <select ng-model="task.colour" ng-options="colour.foodGroup for colour in colours"></select>
               </label>
             </div>
             <div class="padding">

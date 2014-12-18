@@ -77,7 +77,7 @@ angular.module('todo', ['ionic'])
       title: task.title,
       done: false,
       id: $scope.activeProject.tasks.length -1 || 0,
-      colour: null
+      colour: task.colour
     });
     $scope.taskModal.hide();
 
@@ -86,6 +86,15 @@ angular.module('todo', ['ionic'])
 
     task.title = "";
   };
+
+  $scope.colours = [
+      {name:'red', foodGroup:'meat'},
+      {name:'brown', foodGroup:'grains'},
+      {name:'blue', foodGroup:'fruit'},
+      {name:'green', foodGroup:'veggies'},
+      {name:'yellow', foodGroup:'sugar/carbs'},
+      {name: 'white', foodGroup: 'other'}
+    ];
 
   $scope.completeTask = function(task, e) {
     var elem = angular.element(e.srcElement);
