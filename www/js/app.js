@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('todo', ['ionic'])
+angular.module('toEat', ['ionic'])
 
 .factory('Days', function() {
   return {
@@ -32,7 +32,7 @@ angular.module('todo', ['ionic'])
   }
 })
 
-.controller('TodoCtrl', function($scope, $timeout, $ionicModal, Days, $ionicSideMenuDelegate, $element) {
+.controller('ToeatCtrl', function($scope, $timeout, $ionicModal, Days, $ionicSideMenuDelegate, $element) {
   //create a new day given a dayTitle
   var createDay = function(dayTitle) {
     var newDay = Days.newDay(dayTitle);
