@@ -33,10 +33,10 @@
         <!-- center content -->
         <ion-side-menu-content>
           <ion-header-bar class="bar-dark">
-            <button class="button button-icon" ng-click="toggleProjects()">
+            <button class="button button-icon" ng-click="toggleDays()">
               <i class="icon ion-navicon"></i>
             </button>
-            <h1 class="title">Todo</h1>
+            <h1 class="title">ToEat {{activeDay.date}}</h1>
             <!-- new task button -->
             <button class="button button-icon" ng-click="newTask()">
               <i class="icon ion-compose"></i>
@@ -44,7 +44,7 @@
           </ion-header-bar>
           <ion-content scroll="false">
             <ion-list>
-              <ion-item ng-repeat="task in activeProject.tasks" ng-style="{'background-color':task.colour['name']}">
+              <ion-item ng-repeat="task in activeDay.tasks" ng-style="{'background-color':task.colour['name']}">
                 {{task.title}}
                 <span class="checkbox-wrapper" ng-click="completeTask(task, $event)" my-change>
                   <i ng-if="!task.done" class="fa fa-square-o" id="{{task.id}}"></i>
@@ -58,14 +58,14 @@
         <!-- left menu -->
         <ion-side-menu side='left'>
           <ion-header-bar class="bar-dark">
-            <h1 class="title">Projects</h1>
-            <button class="button button-icon ion-plus" ng-click="newProject()">
+            <h1 class="title">Days</h1>
+            <button class="button button-icon ion-plus" ng-click="newDay()">
             </button>
           </ion-header-bar>
           <ion-content scroll="false">
             <ion-list>
-              <ion-item ng-repeat="project in projects" ng-click="selectProject(project, $index)" ng-class="{active : activeProject == project}">
-                {{project.title}}
+              <ion-item ng-repeat="day in days" ng-click="selectDay(day, $index)" ng-class="{active : activeDay == day}">
+                {{day.date}}
               </ion-item>
             </ion-list>
           </ion-content>

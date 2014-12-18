@@ -1,6 +1,8 @@
 # TO_EAT App
 Credit to Doon Foster for the idea of this app: a dietary tracking app, where you can set your meal requirements per each day, and track each one as you complete it.
 
+This app started from the [ionic tutorial app](http://ionicframework.com/tutorials/intro-tutorial/), but then was of course expanded and mutilated.
+
 ## features:
 * many projects, each with their own todo lists
 * ability to checkoff completed items

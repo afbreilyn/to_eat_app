@@ -5,61 +5,60 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('todo', ['ionic'])
 
-.factory('Projects', function() {
+.factory('Days', function() {
   return {
     all: function() {
-      var projectString = window.localStorage['projects'];
-      if(projectString) {
-        // return angular.fromJson(projectString);
-        return [ ];
+      var dayString = window.localStorage['days'];
+      if(dayString) {
+        return angular.fromJson(dayString);
       }
       return [];
     },
-    save: function(projects) {
-      window.localStorage['projects'] = angular.toJson(projects);
+    save: function(days) {
+      window.localStorage['days'] = angular.toJson(days);
     },
-    newProject: function(projectTitle) {
+    newDay: function(dayDate) {
       return {
-        title: projectTitle,
+        date: dayDate,
         tasks: []
       }
     },
     getLastActiveIndex: function() {
-      return parseInt(window.localStorage['lastActiveProject']) || 0;
+      return parseInt(window.localStorage['lastActiveDay']) || 0;
     },
     setLastActiveIndex: function(index) {
-      window.localStorage['lastActiveProject'] = index;
+      window.localStorage['lastActiveDay'] = index;
     }
   }
 })
 
-.controller('TodoCtrl', function($scope, $timeout, $ionicModal, Projects, $ionicSideMenuDelegate, $element) {
-  //create a new project given a projectTitle
-  var createProject = function(projectTitle) {
-    var newProject = Projects.newProject(projectTitle);
-    $scope.projects.push(newProject);
-    Projects.save($scope.projects);
-    $scope.selectProject(newProject, $scope.projects.length-1);
+.controller('TodoCtrl', function($scope, $timeout, $ionicModal, Days, $ionicSideMenuDelegate, $element) {
+  //create a new day given a dayTitle
+  var createDay = function(dayTitle) {
+    var newDay = Days.newDay(dayTitle);
+    $scope.days.push(newDay);
+    Days.save($scope.days);
+    $scope.selectDay(newDay, $scope.days.length-1);
   }
 
-  // load or initialize projects
-  $scope.projects = Projects.all();
+  // load or initialize days
+  $scope.days = Days.all();
 
-  // grab lastActive or the first project
-  $scope.activeProject = $scope.projects[Projects.getLastActiveIndex()];
+  // grab lastActive or the first day
+  $scope.activeDay = $scope.days[Days.getLastActiveIndex()];
 
-  // called to create a new project
-  $scope.newProject = function() {
-    var projectTitle = prompt('Project name');
-    if(projectTitle) {
-      createProject(projectTitle);
+  // called to create a new day
+  $scope.newDay = function() {
+    var dayTitle = prompt('Date');
+    if(dayTitle) {
+      createDay(dayTitle);
     }
   };
 
-  // called to select a given project
-  $scope.selectProject = function(project, index) {
-    $scope.activeProject = project;
-    Projects.setLastActiveIndex(index);
+  // called to select a given day
+  $scope.selectDay = function(day, index) {
+    $scope.activeDay = day;
+    Days.setLastActiveIndex(index);
     $ionicSideMenuDelegate.toggleLeft(false);
   };
 
@@ -71,19 +70,19 @@ angular.module('todo', ['ionic'])
   });
 
   $scope.createTask = function(task) {
-    if(!$scope.activeProject || !task) {
+    if(!$scope.activeDay || !task) {
       return;
     }
-    $scope.activeProject.tasks.push({
+    $scope.activeDay.tasks.push({
       title: task.title,
       done: false,
-      id: $scope.activeProject.tasks.length -1 || 0,
+      id: $scope.activeDay.tasks.length -1 || 0,
       colour: task.colour
     });
     $scope.taskModal.hide();
 
-    // saves all the projects. inefficient: change later
-    Projects.save($scope.projects);
+    // saves all the days. inefficient: change later
+    Days.save($scope.days);
 
     task.title = "";
   };
@@ -100,7 +99,7 @@ angular.module('todo', ['ionic'])
   $scope.completeTask = function(task, e) {
     var elem = angular.element(e.srcElement);
     task.done = !task.done
-    Projects.save($scope.projects);
+    Days.save($scope.days);
   };
 
   // opens modal
@@ -113,18 +112,18 @@ angular.module('todo', ['ionic'])
     $scope.taskModal.hide();
   };
 
-  // toggle projects
-  $scope.toggleProjects = function() {
+  // toggle days
+  $scope.toggleDays = function() {
     $ionicSideMenuDelegate.toggleLeft();
   };
 
   // uses $timeout so everything can be initialized properly
   $timeout(function() {
-    if($scope.projects.length == 0) {
+    if($scope.days.length == 0) {
       while(true) {
-        var projectTitle = prompt('Your first project title:');
-        if(projectTitle) {
-          createProject(projectTitle);
+        var dayTitle = prompt('Your first date:');
+        if(dayTitle) {
+          createDay(dayTitle);
           break;
         }
       }
