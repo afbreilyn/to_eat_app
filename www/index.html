@@ -46,8 +46,9 @@
             <ion-list>
               <ion-item ng-repeat="task in activeProject.tasks">
                 {{task.title}}
-                <span class="checkbox-wrapper" ng-click="completeTask(task)">
-                  <i class="fa fa-square-o" id="{{task.id}}"></i>
+                <span class="checkbox-wrapper" ng-click="completeTask(task, $event)" my-change>
+                  <i ng-if="!task.done" class="fa fa-square-o" id="{{task.id}}"></i>
+                  <i ng-if="task.done" class="fa fa-check-square-o" id="{{task.id"}}></i>
                 </span>
               </ion-item>
             </ion-list>
@@ -87,6 +88,12 @@
             <div class="list">
               <label class="item item-input">
                 <input type="text" placeholder="What do you need to do?" ng-model="task.title">
+                <select>
+                  <option></option>
+                  <option></option>
+                  <option></option>
+                  <option></option>
+                </select>
               </label>
             </div>
             <div class="padding">

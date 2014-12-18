@@ -32,7 +32,7 @@ angular.module('todo', ['ionic'])
   }
 })
 
-.controller('TodoCtrl', function($scope, $timeout, $ionicModal, Projects, $ionicSideMenuDelegate) {
+.controller('TodoCtrl', function($scope, $timeout, $ionicModal, Projects, $ionicSideMenuDelegate, $element) {
   //create a new project given a projectTitle
   var createProject = function(projectTitle) {
     var newProject = Projects.newProject(projectTitle);
@@ -76,7 +76,8 @@ angular.module('todo', ['ionic'])
     $scope.activeProject.tasks.push({
       title: task.title,
       done: false,
-      id: $scope.activeProject.tasks.length -1 || 0
+      id: $scope.activeProject.tasks.length -1 || 0,
+      colour: null
     });
     $scope.taskModal.hide();
 
@@ -86,9 +87,10 @@ angular.module('todo', ['ionic'])
     task.title = "";
   };
 
-  $scope.completeTask = function(task) {
-    // console.log("taskid is: " + task.title);
-
+  $scope.completeTask = function(task, e) {
+    var elem = angular.element(e.srcElement);
+    task.done = !task.done
+    Projects.save($scope.projects);
   };
 
   // opens modal
