@@ -10,7 +10,8 @@ angular.module('todo', ['ionic'])
     all: function() {
       var projectString = window.localStorage['projects'];
       if(projectString) {
-        return angular.fromJson(projectString);
+        // return angular.fromJson(projectString);
+        return [ ];
       }
       return [];
     },
@@ -88,11 +89,11 @@ angular.module('todo', ['ionic'])
   };
 
   $scope.colours = [
-      {name:'red', foodGroup:'meat'},
-      {name:'brown', foodGroup:'grains'},
-      {name:'blue', foodGroup:'fruit'},
-      {name:'green', foodGroup:'veggies'},
-      {name:'yellow', foodGroup:'sugar/carbs'},
+      {name:'#CD5C5C', foodGroup:'meat'},
+      {name:'#D2B48C', foodGroup:'grains'},
+      {name:'#B0E0E6', foodGroup:'fruit'},
+      {name:'#20B2AA', foodGroup:'veggies'},
+      {name:'#F0E68C', foodGroup:'sugar/carbs'},
       {name: 'white', foodGroup: 'other'}
     ];
 
