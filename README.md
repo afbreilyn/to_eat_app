@@ -8,7 +8,7 @@ This app started from the [ionic tutorial app](http://ionicframework.com/tutoria
 * ability to checkoff completed items
 
 ## things to do: 
-* change projects to days, change todo to to-eat [ ]
+* change projects to days, change todo to to-eat [18-12-14]
 * proper (half decent) colours for li items [18-12-14]
 * upon day creation, allow the input how much of which food groups [ ]
 * counters in the 'day' which correspond to the checkboxes on each item [ ]

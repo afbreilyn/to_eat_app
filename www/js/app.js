@@ -10,16 +10,18 @@ angular.module('toEat', ['ionic'])
     all: function() {
       var dayString = window.localStorage['days'];
       if(dayString) {
-        return angular.fromJson(dayString);
+        // return angular.fromJson(dayString);
+        return [];
       }
       return [];
     },
     save: function(days) {
       window.localStorage['days'] = angular.toJson(days);
     },
-    newDay: function(dayDate) {
+    newDay: function(dayDate, tasksNum) {
       return {
         date: dayDate,
+        numOfTasks: tasksNum,
         tasks: []
       }
     },
@@ -34,8 +36,8 @@ angular.module('toEat', ['ionic'])
 
 .controller('ToeatCtrl', function($scope, $timeout, $ionicModal, Days, $ionicSideMenuDelegate, $element) {
   //create a new day given a dayTitle
-  var createDay = function(dayTitle) {
-    var newDay = Days.newDay(dayTitle);
+  var createDay = function(dayTitle, tasksNum) {
+    var newDay = Days.newDay(dayTitle, tasksNum);
     $scope.days.push(newDay);
     Days.save($scope.days);
     $scope.selectDay(newDay, $scope.days.length-1);
@@ -50,8 +52,9 @@ angular.module('toEat', ['ionic'])
   // called to create a new day
   $scope.newDay = function() {
     var dayTitle = prompt('Date');
-    if(dayTitle) {
-      createDay(dayTitle);
+    var tasksNum = prompt('Number of Tasks')
+    if(dayTitle && tasksNum) {
+      createDay(dayTitle, tasksNum);
     }
   };
 
@@ -122,8 +125,9 @@ angular.module('toEat', ['ionic'])
     if($scope.days.length == 0) {
       while(true) {
         var dayTitle = prompt('Your first date:');
-        if(dayTitle) {
-          createDay(dayTitle);
+        var tasksNum = '0'; //defaults to unlimited for your first
+        if(dayTitle && tasksNum) {
+          createDay(dayTitle, tasksNum);
           break;
         }
       }
