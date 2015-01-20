@@ -43,6 +43,11 @@ angular.module('toEat', ['ionic'])
     $scope.selectDay(newDay, $scope.days.length-1);
   }
 
+  // closes day modal
+  $scope.closeNewDayModal = function() {
+    $scope.dayModal.hide();
+  };
+
   // load or initialize days
   $scope.days = Days.all();
 
@@ -51,8 +56,9 @@ angular.module('toEat', ['ionic'])
 
   // called to create a new day
   $scope.newDay = function() {
-    var dayTitle = prompt('Date');
-    var tasksNum = prompt('Number of Tasks')
+    $scope.dayModal.show()
+    // var dayTitle = prompt('Date');
+    // var tasksNum = prompt('Number of Tasks')
     if(dayTitle && tasksNum) {
       createDay(dayTitle, tasksNum);
     }
@@ -65,9 +71,15 @@ angular.module('toEat', ['ionic'])
     $ionicSideMenuDelegate.toggleLeft(false);
   };
 
-  // create and load the modal
+  // create and load the new task modal
   $ionicModal.fromTemplateUrl('new-task.html', function(modal) {
     $scope.taskModal = modal;
+  }, {
+    scope: $scope
+  });
+
+  $ionicModal.fromTemplateUrl('new-day.html', function(modal) {
+    $scope.dayModal = modal;
   }, {
     scope: $scope
   });
@@ -105,12 +117,12 @@ angular.module('toEat', ['ionic'])
     Days.save($scope.days);
   };
 
-  // opens modal
+  // opens task modal
   $scope.newTask = function() {
     $scope.taskModal.show();
   };
 
-  // closes modal
+  // closes task modal
   $scope.closeNewTask = function() {
     $scope.taskModal.hide();
   };
@@ -124,8 +136,9 @@ angular.module('toEat', ['ionic'])
   $timeout(function() {
     if($scope.days.length == 0) {
       while(true) {
-        var dayTitle = prompt('Your first date:');
-        var tasksNum = '0'; //defaults to unlimited for your first
+        $scope.newDay();
+        // var dayTitle = prompt('Your first date:');
+        // var tasksNum = '0'; //defaults to unlimited for your first
         if(dayTitle && tasksNum) {
           createDay(dayTitle, tasksNum);
           break;
