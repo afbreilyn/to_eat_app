@@ -35,13 +35,17 @@ angular.module('toEat', ['ionic'])
 })
 
 .controller('ToeatCtrl', function($scope, $timeout, $ionicModal, Days, $ionicSideMenuDelegate, $element) {
-  //create a new day given a dayTitle
-  var createDay = function(dayTitle, tasksNum) {
+
+  // creates and saves a day
+  $scope.createDay = function(tempDay) {
+    dayTitle = tempDay.title;
+    tasksNum = tempDay.num;
     var newDay = Days.newDay(dayTitle, tasksNum);
     $scope.days.push(newDay);
     Days.save($scope.days);
     $scope.selectDay(newDay, $scope.days.length-1);
-  }
+    $scope.closeNewDayModal();
+  };
 
   // closes day modal
   $scope.closeNewDayModal = function() {
@@ -54,15 +58,9 @@ angular.module('toEat', ['ionic'])
   // grab lastActive or the first day
   $scope.activeDay = $scope.days[Days.getLastActiveIndex()];
 
-  // called to create a new day
   $scope.newDay = function() {
     $scope.dayModal.show()
-    // var dayTitle = prompt('Date');
-    // var tasksNum = prompt('Number of Tasks')
-    if(dayTitle && tasksNum) {
-      createDay(dayTitle, tasksNum);
-    }
-  };
+  }
 
   // called to select a given day
   $scope.selectDay = function(day, index) {
@@ -135,15 +133,18 @@ angular.module('toEat', ['ionic'])
   // uses $timeout so everything can be initialized properly
   $timeout(function() {
     if($scope.days.length == 0) {
-      while(true) {
-        $scope.newDay();
-        // var dayTitle = prompt('Your first date:');
-        // var tasksNum = '0'; //defaults to unlimited for your first
-        if(dayTitle && tasksNum) {
-          createDay(dayTitle, tasksNum);
-          break;
-        }
-      }
+      $scope.newDay();
+      // while(true) {
+      //   $scope.newDay();
+      //   // var dayTitle = prompt('Your first date:');
+      //   // var tasksNum = '0'; //defaults to unlimited for your first
+      //   dayTitle = day.title;
+      //   tasksNum = day.num;
+      //   if(dayTitle && tasksNum) {
+      //     createDay(dayTitle, tasksNum);
+      //     break;
+      //   }
+      // }
     }
   });
 })

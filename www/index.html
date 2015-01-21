@@ -104,10 +104,27 @@
     <!-- new day modal -->
     <script id="new-day.html" type="text/ng-template">
       <div class="modal">
-        <!-- header -->
+        <!-- modal header -->
         <ion-header-bar class="bar-secondary">
           <h1 class="title">New Day</h1>
+          <button class="button button-clear button-positive" ng-click="closeNewDayModal()">Cancel</button>
         </ion-header-bar>
+        <!-- modal body -->
+        <ion-content>
+          <form ng-submit="createDay(day)">
+            <div class="list">
+              <label class="item item-input">
+                <input type="text" placeholder="What day would you like to create?" ng-model="day.title">
+              </label>
+              <label class="item item-input">
+                <input type="number" ng-model="day.tasksNum">
+              </label>
+            </div>
+            <div class="padding">
+              <button type="submit" class="button button-block button-positive">Create Day</button>
+            </div>
+          </form>
+        </ion-content>
       </div>
     </script>
 
