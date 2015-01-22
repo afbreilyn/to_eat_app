@@ -50,6 +50,9 @@ angular.module('toEat', ['ionic'])
   // closes day modal
   $scope.closeNewDayModal = function() {
     $scope.dayModal.hide();
+    if($scope.days.length == 0) {
+      $ionicSideMenuDelegate.toggleLeft();
+    }
   };
 
   // load or initialize days
