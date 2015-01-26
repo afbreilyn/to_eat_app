@@ -39,8 +39,9 @@ angular.module('toEat', ['ionic'])
   // creates and saves a day
   $scope.createDay = function(tempDay) {
     dayTitle = tempDay.title;
-    tasksNum = tempDay.num;
+    tasksNum = tempDay.tasksNum;
     var newDay = Days.newDay(dayTitle, tasksNum);
+    console.log(newDay)
     $scope.days.push(newDay);
     Days.save($scope.days);
     $scope.selectDay(newDay, $scope.days.length-1);
@@ -52,7 +53,8 @@ angular.module('toEat', ['ionic'])
     $scope.dayModal.hide();
     if($scope.days.length == 0) {
       $ionicSideMenuDelegate.toggleLeft();
-    }
+    };
+    $scope.dayForm.$setPristine();
   };
 
   // load or initialize days
@@ -64,6 +66,7 @@ angular.module('toEat', ['ionic'])
   $scope.newDay = function() {
     $scope.dayModal.show()
   }
+
 
   // called to select a given day
   $scope.selectDay = function(day, index) {

@@ -84,6 +84,7 @@
 
         <!-- modal content -->
         <ion-content>
+          <p>{{activeDay}}</p>
           <form ng-submit="createTask(task)">
             <div class="list">
               <label class="item item-input">
@@ -111,7 +112,7 @@
         </ion-header-bar>
         <!-- modal body -->
         <ion-content>
-          <form ng-submit="createDay(day)">
+          <form ng-submit="createDay(day)" name="dayForm">
             <div class="list">
               <label class="item item-input">
                 <input type="text" placeholder="What day would you like to create?" ng-model="day.title">
