@@ -54,7 +54,7 @@ angular.module('toEat', ['ionic'])
     if($scope.days.length == 0) {
       $ionicSideMenuDelegate.toggleLeft();
     };
-    $scope.dayForm.$setPristine();
+    // $scope.dayForm.$setPristine();
   };
 
   // load or initialize days
