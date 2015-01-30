@@ -36,7 +36,7 @@
             <button class="button button-icon" ng-click="toggleDays()">
               <i class="icon ion-navicon"></i>
             </button>
-            <h1 class="title">ToEat {{activeDay.date}}</h1>
+            <h1 class="title">ToEat: {{activeDay.date}}</h1>
             <!-- new task button -->
             <button class="button button-icon" ng-click="newTask()">
               <i class="icon ion-compose"></i>
@@ -49,6 +49,9 @@
                 <span class="checkbox-wrapper" ng-click="completeTask(task, $event)" my-change>
                   <i ng-if="!task.done" class="fa fa-square-o" id="{{task.id}}"></i>
                   <i ng-if="task.done" class="fa fa-check-square-o" id="{{task.id"}}></i>
+                </span>
+                <span class="delete-task-wrapper" ng=click="deleteTask(">
+                  <i class="fa fa-times"></i>
                 </span>
               </ion-item>
             </ion-list>
