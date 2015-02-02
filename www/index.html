@@ -87,8 +87,8 @@
 
         <!-- modal content -->
         <ion-content>
-          <p>{{activeDay}}</p>
-          <form ng-submit="createTask(task)">
+          <p>{{activeDay.numOfTasks}}</p>
+          <form ng-submit="createTask([task])">
             <div class="list">
               <label class="item item-input">
                 <input type="text" placeholder="What do you need to do?" ng-model="task.title">

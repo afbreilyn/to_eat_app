@@ -88,22 +88,37 @@ angular.module('toEat', ['ionic'])
     scope: $scope
   });
 
-  $scope.createTask = function(task) {
-    if(!$scope.activeDay || !task) {
+  $scope.createTask = function(task_array) {
+    console.log('task array is: ' + task_array);
+    if(!$scope.activeDay || !task_array) {
+      console.log('about to return');
       return;
     }
-    $scope.activeDay.tasks.push({
-      title: task.title,
-      done: false,
-      id: $scope.activeDay.tasks.length -1 || 0,
-      colour: task.colour
+    // task_array.forEach(task)
+    angular.forEach(task_array, function(value) {
+      console.log('value is:' + value);
+      console.log(value.title)
+      // $scope.activeDay.tasks.push({
+      //   title: task.title,
+      //   done: false,
+      //   id: $scope.activeDay.tasks.length -1 || 0,
+      //   colour: task.colour
+      // });
     });
+    //   console.log('here')
+    //   $scope.activeDay.tasks.push({
+    //     title: task.title,
+    //     done: false,
+    //     id: $scope.activeDay.tasks.length -1 || 0,
+    //     colour: task.colour
+    //   });
+    // );
     $scope.taskModal.hide();
 
     // saves all the days. inefficient: change later
     Days.save($scope.days);
 
-    task.title = "";
+    // task.title = "";
   };
 
   $scope.colours = [
